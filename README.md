@@ -41,3 +41,12 @@ However the [tuning app](https://www.omc-stepperonline.com/index.php?route=produ
 [Next.js Framework](https://nextjs.org/)
 
 [Node SerialPort](https://serialport.io/)
+
+## Other Resources
+
+[Serial Port Monitor](https://www.com-port-monitoring.com/)
+
+Recent Reddit posts indicate this is likely the best available monitor for sniffing
+USBSerial traffic between a 3rd party app and an external device on a Windows host.
+You need the $99 pro version for this capability.  This monitor will be needed for
+reverse engineering the Stepperonline protocol.
