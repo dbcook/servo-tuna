@@ -3,7 +3,7 @@
 This is an embryonic try at creating a cross-platform Node/React based app for tuning USB-serial connected servos.
 
 The initial target is the
-(StepperOnline iSV57T)[https://www.omc-stepperonline.com/nema-23-integrated-easy-servo-motor-90w-3000rpm-0-3nm-42-49oz-in-20-50vdc-brushless-dc-servo-motor-isv57t-090]
+[StepperOnline iSV57T](https://www.omc-stepperonline.com/nema-23-integrated-easy-servo-motor-90w-3000rpm-0-3nm-42-49oz-in-20-50vdc-brushless-dc-servo-motor-isv57t-090)
 series of servos.
 
 ## Motivation
@@ -11,7 +11,7 @@ series of servos.
 The StepperOnline iSV57T NEMA 23 servos are very inexpensive ($100 price point) servos with stepper-compataible pulse/dir control and high resolution 32K encoders.
 This makes them conceptually very attractive for a number of DIY applications including CNC machine conversions, telescope mount drives, etc.
 
-However the (tuning app)[https://www.omc-stepperonline.com/index.php?route=product/product/get_file&file=1361/iSV-T_software.zip] provided by StepperOnline is execrable.
+However the [tuning app](https://www.omc-stepperonline.com/index.php?route=product/product/get_file&file=1361/iSV-T_software.zip) provided by StepperOnline is execrable.
 
 * Windows-only
 * No real documentation
@@ -34,10 +34,10 @@ However the (tuning app)[https://www.omc-stepperonline.com/index.php?route=produ
 
 ## Framework Elements
 
-(Node.js)[https://nodejs.org/en/download/]
+[Node.js](https://nodejs.org/en/download/)
 
-(React UI Components)[https://react.dev/learn/start-a-new-react-project]
+[React UI Components](https://react.dev/learn/start-a-new-react-project)
 
-(Next.js Framework)[https://nextjs.org/]
+[Next.js Framework](https://nextjs.org/)
 
-(Node SerialPort)[https://serialport.io/]
+[Node SerialPort](https://serialport.io/)
