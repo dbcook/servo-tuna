@@ -50,3 +50,20 @@ Recent Reddit posts indicate this is likely the best available monitor for sniff
 USBSerial traffic between a 3rd party app and an external device on a Windows host.
 You need the $99 pro version for this capability.  This monitor will be needed for
 reverse engineering the Stepperonline protocol.
+
+## Setup
+
+```
+brew install npm  # if needed
+# git clone servo-tuna and cd into that dir...
+# install react, react-dom, next, and serialport
+npm install react@latest react-dom@latest next@latest
+npm install serialport
+```
+
+## Execute
+
+```
+npm run dev
+# in browser go to localhost:3000
+```
