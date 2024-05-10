@@ -1,5 +1,7 @@
 # servo-tuna - Servo tuning app for USB-serial connected motors
 
+__CAVEAT__ This is WIP and doesn't do anything useful yet!
+
 This is an embryonic try at creating a cross-platform Node/React based app for tuning USB-serial connected servos.
 
 The initial target is the
