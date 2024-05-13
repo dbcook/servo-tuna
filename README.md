@@ -80,10 +80,13 @@ lacks various crucial design features:
 The serialport prebuilds tree needs to be found in the directory from where the Node server runs.
 For a nextjs app, this is ./.next/server
 This is because of how node_modules/node-gyp-build/node-gyp-build.js resolves paths.
-However, .next/server gets completely wiped out everytime you do 'npm run dev'
+However, .next/server gets completely wiped out everytime you do 'npm run dev', so you
+can't implant the prebuilts beforehand.
 
-In addition, the serialport project looks rather moribund, with 130+ open issues and no recent
-commit activity by anything except renovate-bot.
+In addition, the serialport project looks quite moribund, with 130+ open issues and no recent
+commit activity by anything except renovate-bot.  Some serious issues over a year old have
+no human responses.  Basically it's dead unless you can tolerate low functionality and a
+lot of headaches.
 
 ## Other Resources
 
@@ -109,6 +112,7 @@ npm install react@latest react-dom@latest next@latest
 ### Resetting Dependencies
 
 `npm install` manipulates package-lock.json in ways that can cause trouble.  `npm ci` is less destructive.
+See [discussion here](https://stackoverflow.com/questions/48524417/should-the-package-lock-json-file-be-added-to-gitignore)
 
 There is some controversy about whether package-lock.json should be gitignore'd but the majority opinion
 seems to be that it should be checked into github.
