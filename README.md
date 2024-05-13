@@ -8,6 +8,18 @@ The initial target is the
 [StepperOnline iSV57T](https://www.omc-stepperonline.com/nema-23-integrated-easy-servo-motor-90w-3000rpm-0-3nm-42-49oz-in-20-50vdc-brushless-dc-servo-motor-isv57t-090)
 series of servos.
 
+## Project Status
+
+*RESEARCHING*
+
+The current issue is to find a serial port library for node.js apps that has sufficient features
+to robustly run proper serial protocols asynchronously, and that
+will run inside all major Node frameworks (Electron, next.js, etc).
+
+The most obvious candidate has been ruled out - see details under "Things that Don't Work".
+I am not eager to build a new serial library but it might be necessary.
+
+
 ## Motivation
 
 The StepperOnline iSV57T NEMA 23 servos are very inexpensive ($100 price point) servos with stepper-compataible pulse/dir control and high resolution 32K encoders.
@@ -30,9 +42,16 @@ However the [tuning app](https://www.omc-stepperonline.com/index.php?route=produ
 * Help selecting the correct serial port
 * Much more intuitive UI
 * Useful embedded help
-* Effective wide-range auto-tuning
+* Effective wide-range auto-tuning with frequency response analysis
 * Drastically improved performance graph functionality and automation
 * Extendable to other serial port configured servos like ClearPath, DMM, etc.
+
+## Possible Limitations
+
+* Serial port may not offer full rate step/direction support.
+* The tuning program thus might need access to some hardware that can work
+  as a pulse function generator.  Need rates up to 300KHz to fully exercise the servos.
+  This implies a pretty fast MCU like a Teensy 4.1.
 
 ## Framework Elements
 
@@ -42,7 +61,29 @@ However the [tuning app](https://www.omc-stepperonline.com/index.php?route=produ
 
 [Next.js Framework](https://nextjs.org/)
 
-[Node SerialPort](https://serialport.io/)
+## Things that Don't Work
+
+[Node SerialPort](https://serialport.io/) - REJECTED
+
+So far I've determined that the [standalone serialport node library](https://serialport.io/)
+is not suitable for this application.  Although it's been around for 10+ years, it
+lacks various crucial design features:
+
+1. There's no provision for full control of the HW flow control lines on all platforms
+   (essential for programming Arduino devices and for some embedded targets)
+2. No clean method for terminating async read calls when the port is closed; prevents
+   the node process from exiting and may leak resources.
+3. Does not detect when it's executing in the browser where serial port access isn't allowed
+4. Can't find its architecture specific prebuilt libraries when webpack'd at
+   runtime by next.js (see following explanation)
+
+The serialport prebuilds tree needs to be found in the directory from where the Node server runs.
+For a nextjs app, this is ./.next/server
+This is because of how node_modules/node-gyp-build/node-gyp-build.js resolves paths.
+However, .next/server gets completely wiped out everytime you do 'npm run dev'
+
+In addition, the serialport project looks rather moribund, with 130+ open issues and no recent
+commit activity by anything except renovate-bot.
 
 ## Other Resources
 
@@ -55,15 +96,29 @@ reverse engineering the Stepperonline protocol.
 
 ## Setup
 
+### Initial Setup
 ```
 brew install npm  # if needed
 # git clone servo-tuna and cd into that dir...
-# install react, react-dom, next, and serialport
+# install react, react-dom, next.js
 npm install react@latest react-dom@latest next@latest
-npm install serialport
+# npm install serialport  # deprecated, need replacement!
+# npm install child_process # needed by serialport
 ```
 
+### Resetting Dependencies
+
+`npm install` manipulates package-lock.json in ways that can cause trouble.  `npm ci` is less destructive.
+
+To reset everything:
+
+1. wipe out node_modules with `rm -rf ./node_modules`
+2. remove `package-lock.json` or erase all its contents
+3. wipe out the `dependencies` entry in `package.json`
+4. re-do the `npm install` operations as given above
+
 ## Execute
+
 
 ```
 npm run dev

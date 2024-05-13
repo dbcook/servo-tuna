@@ -1,6 +1,8 @@
 'use client';
 import { useState } from 'react';
 
+// console.log(process);   # this is a big json object
+
 export default function LikeButton() {
     const [likes, setLikes] = useState(0);
 
@@ -10,3 +12,4 @@ export default function LikeButton() {
 
     return <button onClick={handleClick}>Like ({likes})</button>;    
 }
+
