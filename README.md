@@ -19,6 +19,10 @@ will run inside all major Node frameworks (Electron, next.js, etc).
 The most obvious candidate has been ruled out - see details under "Things that Don't Work".
 I am not eager to build a new serial library but it might be necessary.
 
+[The Mozilla Serial Web API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) is of interest.
+It's pretty new (still shown as experimental) and specifically claims to handle the control lines and port closure properly.
+So far it only works in Chrome, Edge and Opera browsers but that's probably good enough already.
+
 
 ## Motivation
 
