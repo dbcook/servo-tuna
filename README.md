@@ -110,6 +110,9 @@ npm install react@latest react-dom@latest next@latest
 
 `npm install` manipulates package-lock.json in ways that can cause trouble.  `npm ci` is less destructive.
 
+There is some controversy about whether package-lock.json should be gitignore'd but the majority opinion
+seems to be that it should be checked into github.
+
 To reset everything:
 
 1. wipe out node_modules with `rm -rf ./node_modules`
