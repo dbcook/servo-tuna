@@ -16,13 +16,13 @@ The current issue is to find a serial port library for node.js apps that has suf
 to robustly run proper serial protocols asynchronously, and that
 will run inside all major Node frameworks (Electron, next.js, etc).
 
-One obvious candidate has been ruled out - see details under "Things that Don't Work".
-
-[The Mozilla Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) is now of interest.
+[The Mozilla Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) is of interest.
 It's pretty new (still shown as experimental) and specifically claims to handle the control lines and port closure properly.
 So far it's only built into Chrome, Edge and Opera browsers and requires that
-you are using HTTPS but that's probably good enough.  Experiments to ensue.
+you are using HTTPS but that's probably good enough.  Using these built-in APIs will eliminate all problems
+with binary paths under webpack.  Experiments to ensue.
 
+One other candidate that still gets mentioned quite a bit has been ruled out - see details under "Things that Don't Work".
 
 ## Motivation
 
@@ -52,7 +52,8 @@ However the [tuning app](https://www.omc-stepperonline.com/index.php?route=produ
 
 ## Possible Limitations
 
-* Serial port may not offer full rate step/direction support.  Needs exploration.
+* Serial port programming interface on the servos may not offer full rate step/direction support
+  that is needed for comprehensive auto-tuning.  Needs exploration.
 * The tuning program thus might need access to some hardware that can work
   as a pulse function generator.  Need rates up to 300KHz to fully exercise the servos.
   This implies a pretty fast MCU like a Teensy 4.1.
@@ -71,7 +72,7 @@ However the [tuning app](https://www.omc-stepperonline.com/index.php?route=produ
 
 [Node SerialPort](https://serialport.io/) - REJECTED
 
-So far I've determined that the [standalone serialport node library](https://serialport.io/)
+I've determined that the [standalone serialport node library](https://serialport.io/)
 is not suitable for this application.  Although it's been around for 10+ years, it
 lacks various crucial design features:
 
@@ -96,11 +97,11 @@ lot of headaches.
 
 ## Other Resources
 
-[Serial Port Monitor](https://www.com-port-monitoring.com/)
+[Serial Port Monitor for Windows](https://www.com-port-monitoring.com/)
 
 Recent Reddit posts indicate this is likely the best available monitor for sniffing
 USBSerial traffic between a 3rd party app and an external device on a Windows host.
-You need the $99 pro version for this capability.  This monitor will be needed for
+You need the $99 pro version for this capability.  This monitor is needed for
 reverse engineering the Stepperonline protocol.
 
 ## Setup
@@ -123,7 +124,7 @@ See [discussion here](https://stackoverflow.com/questions/48524417/should-the-pa
 There is some controversy about whether package-lock.json should be gitignore'd but the majority opinion
 seems to be that it should be checked into github.
 
-To reset everything:
+To reset everything (this is reasonably quick):
 
 1. wipe out node_modules with `rm -rf ./node_modules`
 2. remove `package-lock.json` or erase all its contents
