@@ -41,7 +41,7 @@ However the [tuning app](https://www.omc-stepperonline.com/index.php?route=produ
 
 ## Goals
 
-* Cross-platform app using Node.js (via the next.js framework), React UI components, and the serialport library for Node.
+* Cross-platform app using Node.js (via the next.js framework), React UI components, and the Web Serial APIß.
 * Reverse engineer the serial protocol for the iSV57T servos.
 * Help selecting the correct serial port
 * Much more intuitive UI
