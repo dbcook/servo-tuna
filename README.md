@@ -16,12 +16,12 @@ The current issue is to find a serial port library for node.js apps that has suf
 to robustly run proper serial protocols asynchronously, and that
 will run inside all major Node frameworks (Electron, next.js, etc).
 
-The most obvious candidate has been ruled out - see details under "Things that Don't Work".
-I am not eager to build a new serial library but it might be necessary.
+One obvious candidate has been ruled out - see details under "Things that Don't Work".
 
-[The Mozilla Serial Web API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) is of interest.
+[The Mozilla Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) is now of interest.
 It's pretty new (still shown as experimental) and specifically claims to handle the control lines and port closure properly.
-So far it only works in Chrome, Edge and Opera browsers but that's probably good enough already.
+So far it's only built into Chrome, Edge and Opera browsers and requires that
+you are using HTTPS but that's probably good enough.  Experiments to ensue.
 
 
 ## Motivation
@@ -52,7 +52,7 @@ However the [tuning app](https://www.omc-stepperonline.com/index.php?route=produ
 
 ## Possible Limitations
 
-* Serial port may not offer full rate step/direction support.
+* Serial port may not offer full rate step/direction support.  Needs exploration.
 * The tuning program thus might need access to some hardware that can work
   as a pulse function generator.  Need rates up to 300KHz to fully exercise the servos.
   This implies a pretty fast MCU like a Teensy 4.1.
@@ -64,6 +64,8 @@ However the [tuning app](https://www.omc-stepperonline.com/index.php?route=produ
 [React UI Components](https://react.dev/learn/start-a-new-react-project)
 
 [Next.js Framework](https://nextjs.org/)
+
+[Mozilla Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API)
 
 ## Things that Don't Work
 
