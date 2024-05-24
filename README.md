@@ -39,6 +39,23 @@ However the [tuning app](https://www.omc-stepperonline.com/index.php?route=produ
 * Doesn't follow conventional terminology for PID control
 * Auto-tune features ineffective for the telescope use case
 
+Thus far I've been able, after much experimentation, to use the StepperOnline tuning
+program to find a parameter set that provides reasonably smooth RA sideral tracking.
+However this requires setting the integration time constant (effective inverse of the
+PID integral gain) to its absolute minimum value.  With the encoder res set for 16K
+counts/rev, OnStepX emits pulses at about 110 Hz and the servo motor ends up moving quickly enough to hold the position error at +/- 3 counts or so.
+
+However, the fine tracking parameters cause very "buzzy" motion when slewing since
+the integration gain is forcing the motor to try to keep up with every pulse.  I haven't
+been able to achieve smooth tracking by adjusting only the position and derivative
+gains, which conventional tuning practice says is how you shold start.  The usual
+result of that is sideral tracking that jumps by several arc seconds 2-3 times per
+second.
+
+There is some suggestion that the iSV57T units have the ability to auto-switch to
+a second set of PID parameters, but the switching control parameters are
+undocumented.
+
 ## Goals
 
 * Cross-platform app using Node.js (via the next.js framework), React UI components, and the Web Serial APIß.
