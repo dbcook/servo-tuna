@@ -50,17 +50,30 @@ However the [tuning app](https://www.omc-stepperonline.com/index.php?route=produ
 * Drastically improved performance graph functionality and automation
 * Extendable to other serial port configured servos like ClearPath, DMM, etc.
 
-## Possible Limitations
+## Possible Pulse Generation Limitations and Options
 
-* The serial port programming interface on the servos may not offer sufficient motion support
-  for comprehensive auto-tuning.  Needs exploration.
-* The tuning program thus might benefit from having some adjunct hardware that can work
-  as a pulse function generator.  Need rates up to 300KHz to fully exercise the servos.
-  Doing the function generation directly would imply a pretty fast MCU like a Teensy 4.1.
-  Perhaps easier to do it with a programmable 2-channel (pulse/dir) function generator like the ones from
-  Rigol and Siglent.
-* Yet another idea would be to implement the function generation in OnStepX, which already has
-  pulse generation code and a WiFi command interface.
+The factory servo tuning features are implemented entirely through the serial port
+on the iSV57T servos, meaning the regular motion interface is not used.  In other
+words, for tuning, the servo firmware acts as its own pulse generator.  It's not
+clear whether this is really good enough for accurate tuning.
+
+There are various options for giving a new tuning program access to the actual
+servo motion interface:"
+
+* The easiest - though not the least expensive - way to do it is to use
+  a programmable 2-channel (pulse/dir) function generator like the ones from
+  Rigol and Siglent.  The Siglent SDG2000 series can be commanded directly over the LAN via a
+  socket.  The 40MHz version SDG2042X ($499 list) should work nicely.
+  Many electronics hobbyists are likely to have function generators already.
+* An Arduino could be attached to the tuning program and programmed to work as a
+  square wave pulse generator.  This would be a lot less expensive but a lot more work
+  than using a commercial function generator.  *** TODO *** Look for pre-made Arduino
+  pulse generator shields.
+* We could easily implement the function generation in OnStepX, which already has
+  pulse generation code and a WiFi command interface.  However this would limit the
+  usability of the tuner to a subset of the astronomy community.
+* Pulse generation could be implemented directly in the computer, but outboard
+  hardware would be needed to obtain good timing, so this would devolve into the Arduino case.
 
 ## Framework Elements
 
