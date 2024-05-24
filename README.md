@@ -22,7 +22,7 @@ So far it's only built into Chrome, Edge and Opera browsers and requires that
 you are using HTTPS but that's probably good enough.  Using these built-in APIs will eliminate all problems
 with binary paths under webpack.  Experiments to ensue.
 
-One other candidate that still gets mentioned quite a bit has been ruled out - see details under "Things that Don't Work".
+One candidate library that still gets mentioned quite a bit has been ruled out - see details under "Things that Don't Work".
 
 ## Motivation
 
@@ -32,12 +32,12 @@ This makes them conceptually very attractive for a number of DIY applications in
 However the [tuning app](https://www.omc-stepperonline.com/index.php?route=product/product/get_file&file=1361/iSV-T_software.zip) provided by StepperOnline is execrable.
 
 * Windows-only
-* No real documentation
+* Many parameters completely undocumented
 * Unhelpful guess-the-port serial port connection UI
-* Very badly translated help text and error messages
+* Badly translated help text and error messages
 * Poor graph interface with totally antique controls, no sliders, etc.
 * Doesn't follow conventional terminology for PID control
-* Auto-tune features totally ineffective
+* Auto-tune features ineffective for the telescope use case
 
 ## Goals
 
@@ -52,11 +52,15 @@ However the [tuning app](https://www.omc-stepperonline.com/index.php?route=produ
 
 ## Possible Limitations
 
-* Serial port programming interface on the servos may not offer full rate step/direction support
-  that is needed for comprehensive auto-tuning.  Needs exploration.
-* The tuning program thus might need access to some hardware that can work
+* The serial port programming interface on the servos may not offer sufficient motion support
+  for comprehensive auto-tuning.  Needs exploration.
+* The tuning program thus might benefit from having some adjunct hardware that can work
   as a pulse function generator.  Need rates up to 300KHz to fully exercise the servos.
-  This implies a pretty fast MCU like a Teensy 4.1.
+  Doing the function generation directly would imply a pretty fast MCU like a Teensy 4.1.
+  Perhaps easier to do it with a programmable 2-channel (pulse/dir) function generator like the ones from
+  Rigol and Siglent.
+* Yet another idea would be to implement the function generation in OnStepX, which already has
+  pulse generation code and a WiFi command interface.
 
 ## Framework Elements
 
